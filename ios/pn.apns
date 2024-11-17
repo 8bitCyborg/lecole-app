@@ -1,0 +1,11 @@
+{
+  "Simulator Target Bundle": "com.lecole.app",
+  "aps": {
+    "alert": {
+      "title": "testing",
+      "body": "testing notifications"
+    },
+    "sound": "cash.wav",
+    "badge": false
+  }
+}
