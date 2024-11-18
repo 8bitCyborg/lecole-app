@@ -9,8 +9,20 @@ const styles = StyleSheet.create({
     minHeight: Dimensions.get('screen').height,
     width: Dimensions.get('screen').width,
     backgroundColor: colors.white,
-    padding:40,
+    padding: 40,
+    paddingVertical: 100,
+  },
+  subHeader: {
+    alignSelf: 'flex-end',
+    fontSize: 20,
+    fontWeight: '500',
+  },
+  footer: {
+    display: 'flex',
+    flexDirection: 'column',
+    marginTop: 30,
   },
 });
+
 
 export default styles;

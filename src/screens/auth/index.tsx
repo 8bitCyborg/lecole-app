@@ -1,27 +1,19 @@
 import React from "react";
-import { ScrollView, Text } from 'react-native';
+import { View, Text } from 'react-native';
 import styles from "./styles";
-import LeInput from "../../components/leInput";
 import LeButton from "../../components/leButton";
+import { useNavigation, NavigationProp } from "@react-navigation/core";
 
-const Login = () => {
-  return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text>Login</Text>
-      <LeInput 
-        label="Email"
-        placeholder="user@email.com"
-      />
-      <LeInput 
-        label="Password"
-        placeholder="Password"
-        secureText={true}
-      />
-      <LeButton 
-        title="Login"
-      />
-    </ScrollView>
+const Welcome = () => {
+  const Navigation = useNavigation<NavigationProp<any>>();
+
+  return(
+    <View style={styles.container}>
+      <Text style={{ fontSize: 25, marginBottom: 25 }}>Le`Cole</Text>
+      <LeButton title="Login" onPress={() => Navigation.navigate('Login')} />
+      <LeButton title="Sign Up" onPress={() => Navigation.navigate('SignUp')} />
+    </View>
   );
 };
 
-export default Login;
+export default Welcome;

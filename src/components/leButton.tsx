@@ -4,11 +4,12 @@ import colors from "../utils/colors";
 
 interface ButtonProps {
   title: string;
+  onPress: () => void;
 };
 
-const LeButton = ({ title }: ButtonProps) => {
+const LeButton = ({ title, onPress }: ButtonProps) => {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <Text style={styles.title}>{title}</Text>
     </TouchableOpacity>
   );

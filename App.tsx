@@ -1,9 +1,13 @@
 import React from 'react';
-import Login from './src/screens/auth';
+
+import NavigationIndex from './src/navigation';
+import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
 
 function App(): React.JSX.Element {
   return (
-    <Login />
+    <NavigationContainer>
+      <NavigationIndex />
+    </NavigationContainer>
   );
 };
 
