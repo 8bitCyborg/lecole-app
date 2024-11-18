@@ -11,7 +11,7 @@ const Welcome = () => {
     <View style={styles.container}>
       <Text style={{ fontSize: 25, marginBottom: 25 }}>Le`Cole</Text>
       <LeButton title="Login" onPress={() => Navigation.navigate('Login')} />
-      <LeButton title="Sign Up" onPress={() => Navigation.navigate('SignUp')} />
+      <LeButton title="Create Account" onPress={() => Navigation.navigate('SignUp')} />
     </View>
   );
 };

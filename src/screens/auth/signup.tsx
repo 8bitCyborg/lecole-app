@@ -12,7 +12,7 @@ const SignUp = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.subHeader}>Sign Up</Text>
+      <Text style={styles.subHeader}>Create Account</Text>
       <LeInput
         label="First Name" 
         placeholder="John"
