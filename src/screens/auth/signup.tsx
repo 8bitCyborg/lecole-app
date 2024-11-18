@@ -40,8 +40,8 @@ const SignUp = () => {
 
       <View style={styles.footer}>
         <Text>Already have an account?</Text>
-        <TouchableWithoutFeedback onPress={() => Navigation.navigate(routenames.Login)}>
-          <Text style={{ textAlign: 'center', color: colors.red, marginTop: 5 }}>Login</Text>
+        <TouchableWithoutFeedback onPress={() => Navigation.navigate(routenames.SignUp)}>
+          <Text style={{ textAlign: 'center', color: colors.red, marginTop: 5 }}>Login Instead</Text>
         </TouchableWithoutFeedback>
       </View>
     </ScrollView>

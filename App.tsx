@@ -4,8 +4,10 @@ import NavigationIndex from './src/navigation';
 import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
 
 function App(): React.JSX.Element {
+  const navigationRef = useNavigationContainerRef();
+
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <NavigationIndex />
     </NavigationContainer>
   );
