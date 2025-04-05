@@ -9,7 +9,7 @@ const Welcome = () => {
 
   return(
     <View style={styles.container}>
-      <Text style={{ fontSize: 25, marginBottom: 25 }}>Le`Cole</Text>
+      <Text style={{ fontSize: 25, marginBottom: 25 }}>L'ecole</Text>
       <LeButton title="Login" onPress={() => Navigation.navigate('Login')} />
       <LeButton title="Create Account" onPress={() => Navigation.navigate('SignUp')} />
     </View>
