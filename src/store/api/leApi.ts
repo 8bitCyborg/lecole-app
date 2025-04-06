@@ -6,7 +6,7 @@ interface InputData {
   [key: string]: any;
 }
 
-const leApiSliceBuilderQuery = (
+const leApiBuilderQuery: any = (
   queryBuilder: EndpointBuilder<BaseQueryFn, any, any>,
 ) => {
   let endpointObj = {};
@@ -58,27 +58,28 @@ const LeApi = createApi({
   reducerPath: 'leApi',
   baseQuery: fetchBaseQuery({ 
     baseUrl: 'http://localhost:3000',
-    // prepareHeaders: (headers, { getState }) => {
-    //   const token = (getState() as any).auth.access_token;      
-    //   if (token) {
-    //     headers.set('authorization', `Bearer ${token}`);
-    //   }
-    //   headers.set('Content-Type', 'application/json');
-    //   return headers;
-    // },
+    prepareHeaders: (headers, { getState }) => {
+      const token = (getState() as any).auth.access_token;      
+      if (token) {
+        headers.set('authorization', `Bearer ${token}`);
+      }
+      headers.set('Content-Type', 'application/json');
+      return headers;
+    },
   }),
   refetchOnFocus: true,
   refetchOnMountOrArgChange: true,
   refetchOnReconnect: true,
-  endpoints: (builder) => ({
-    Login: builder.mutation({
-      query: (inputData: InputData) => ({
-        url: '/auth/login',
-        method: 'POST',
-        body: inputData,
-      }),
-    }),
-  }),
+  endpoints: (builder) => leApiBuilderQuery(builder),
+  // endpoints: (builder) => ({
+  //   Login: builder.mutation({
+  //     query: (inputData: InputData) => ({
+  //       url: '/auth/login',
+  //       method: 'POST',
+  //       body: inputData,
+  //     }),
+  //   }),
+  // }),
   tagTypes: [],
 });
 
