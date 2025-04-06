@@ -5,6 +5,11 @@ const endpoints = [
     url: '/auth/login',
     provideTags: [],
   },
+  {
+    name: 'Signup',
+    method: 'POST',
+    url: '/auth/register',
+  },
 ];
 
 export default endpoints;

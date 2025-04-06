@@ -1,7 +1,5 @@
 import { BaseQueryFn, createApi, EndpointBuilder, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import endpoints from './leEndpoints';
-
-
 interface InputData {
   [key: string]: any;
 }

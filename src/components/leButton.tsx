@@ -5,12 +5,23 @@ import colors from "../utils/colors";
 interface ButtonProps {
   title: string;
   onPress: () => void;
+  disabled?: boolean;
 };
 
-const LeButton = ({ title, onPress }: ButtonProps) => {
+const LeButton = ({ title, onPress, disabled = false }: ButtonProps) => {
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
-      <Text style={styles.title}>{title}</Text>
+    <TouchableOpacity 
+      style={[
+        styles.container,
+        disabled && styles.disabled
+      ]} 
+      onPress={onPress}
+      disabled={disabled}
+    >
+      <Text style={[
+        styles.title,
+        disabled && styles.disabledText
+      ]}>{title}</Text>
     </TouchableOpacity>
   );
 };
@@ -31,5 +42,13 @@ const styles = StyleSheet.create({
   },
   title: {
     color: colors.white,
+  },
+  disabled: {
+    backgroundColor: colors.gray,
+    borderColor: colors.gray,
+  },
+  disabledText: {
+    color: colors.white,
+    opacity: 0.7,
   }
 });
