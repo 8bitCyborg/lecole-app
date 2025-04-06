@@ -63,6 +63,8 @@ const Login = () => {
               error={touched.login_id && errors.login_id}
               keyboardType="email-address"
               autoCapitalize="none"
+              iconName="person"
+              iconType="material-icons"
             />
             
             <LeInput 
@@ -73,6 +75,7 @@ const Login = () => {
               onBlur={handleBlur('password')}
               value={values.password}
               error={touched.password && errors.password}
+              iconName="lock"
             />
             
             <LeButton 
