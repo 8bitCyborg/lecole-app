@@ -7,7 +7,7 @@ import Login from "../screens/auth/login";
 import SignUp from "../screens/auth/signup";
 import { useDispatch, useSelector } from "react-redux";
 import { resetAuth } from "../store/slices/authSlice";
-
+import { persistor } from "../store";
 const AuthStack = createStackNavigator();
 
 const AuthStackScreens = () => {
@@ -25,7 +25,10 @@ const NavigationIndex = () => {
   const dispatch = useDispatch();
   return isLoggedIn ? <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }}>
     <Text> Logged In</Text>
-    <TouchableOpacity onPress={() => dispatch(resetAuth())}>
+    <TouchableOpacity onPress={() => {
+      dispatch(resetAuth());
+      persistor.purge();
+    }}>
       <Text>Logout</Text>
     </TouchableOpacity>
   </View> : <AuthStackScreens />
