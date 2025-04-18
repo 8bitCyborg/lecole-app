@@ -8,8 +8,9 @@ import SignUp from "../screens/auth/signup";
 import { useDispatch, useSelector } from "react-redux";
 import { resetAuth } from "../store/slices/authSlice";
 import { persistor } from "../store";
-const AuthStack = createStackNavigator();
+import BottomTabs from "./bottomTabs";
 
+const AuthStack = createStackNavigator();
 const AuthStackScreens = () => {
   return (
     <AuthStack.Navigator screenOptions={{ headerShown: false }} initialRouteName={routenames.Welcome}>
@@ -23,15 +24,7 @@ const AuthStackScreens = () => {
 const NavigationIndex = () => {
   const isLoggedIn = useSelector((state: any) => state.auth.isLoggedIn);   
   const dispatch = useDispatch();
-  return isLoggedIn ? <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }}>
-    <Text> Logged In</Text>
-    <TouchableOpacity onPress={() => {
-      dispatch(resetAuth());
-      persistor.purge();
-    }}>
-      <Text>Logout</Text>
-    </TouchableOpacity>
-  </View> : <AuthStackScreens />
+  return isLoggedIn ? <BottomTabs /> : <AuthStackScreens />
 }
 
 export default NavigationIndex;
