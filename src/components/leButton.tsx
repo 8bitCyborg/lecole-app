@@ -1,19 +1,29 @@
 import React from "react";
-import { TouchableOpacity, StyleSheet, Text, Dimensions, Button } from "react-native";
+import { 
+  TouchableOpacity, 
+  StyleSheet, 
+  Text, 
+  Dimensions, 
+  Button, 
+  StyleProp, 
+  ViewStyle 
+} from "react-native";
 import colors from "../utils/colors";
 
 interface ButtonProps {
   title: string;
   onPress: () => void;
   disabled?: boolean;
+  btnStyle?: StyleProp<ViewStyle>;
 };
 
-const LeButton = ({ title, onPress, disabled = false }: ButtonProps) => {
+const LeButton = ({ title, onPress, disabled = false, btnStyle }: ButtonProps) => {
   return (
     <TouchableOpacity 
       style={[
         styles.container,
-        disabled && styles.disabled
+        disabled && styles.disabled,
+        btnStyle
       ]} 
       onPress={onPress}
       disabled={disabled}
