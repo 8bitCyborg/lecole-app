@@ -6,10 +6,22 @@ import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import colors from '../utils/colors';
 import Icon from '@rneui/themed/dist/Icon';
+import routenames from './routenames';
 
 import HomeScreen from '../screens/home';
 import ProfileScreen from '../screens/profile';
 import NotificationsScreen from '../screens/notifications';
+import SchoolScreen from '../screens/school';
+
+const SchoolStack = createStackNavigator();
+const SchoolStackScreens = () => {
+  return (
+    <SchoolStack.Navigator screenOptions={{ headerShown: false }} initialRouteName={routenames.Home}>
+      <SchoolStack.Screen name={routenames.Home} component={HomeScreen} />
+      <SchoolStack.Screen name={routenames.School} component={SchoolScreen} />
+    </SchoolStack.Navigator>
+  )
+}
 
 type BottomTabParamList = {
   Home: undefined;
@@ -51,7 +63,7 @@ const BottomTabs = () => {
     >
       <Tab.Screen 
         name="Home" 
-        component={HomeScreen} 
+        component={SchoolStackScreens} 
         options={({ navigation, route }) => ({
           tabBarIcon: ({ focused }) => (
             <Icon 
