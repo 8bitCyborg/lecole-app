@@ -16,8 +16,8 @@ import SchoolScreen from '../screens/school';
 const SchoolStack = createStackNavigator();
 const SchoolStackScreens = () => {
   return (
-    <SchoolStack.Navigator screenOptions={{ headerShown: false }} initialRouteName={routenames.Home}>
-      <SchoolStack.Screen name={routenames.Home} component={HomeScreen} />
+    <SchoolStack.Navigator screenOptions={{ headerShown: false }} initialRouteName={routenames.School}>
+      {/* <SchoolStack.Screen name={routenames.Home} component={HomeScreen} /> */}
       <SchoolStack.Screen name={routenames.School} component={SchoolScreen} />
     </SchoolStack.Navigator>
   )
@@ -25,6 +25,7 @@ const SchoolStackScreens = () => {
 
 type BottomTabParamList = {
   Home: undefined;
+  School: undefined;
   Notifications: undefined;
   Search: undefined;
   Profile: undefined;
@@ -63,12 +64,31 @@ const BottomTabs = () => {
     >
       <Tab.Screen 
         name="Home" 
-        component={SchoolStackScreens} 
+        component={HomeScreen} 
         options={({ navigation, route }) => ({
           tabBarIcon: ({ focused }) => (
             <Icon 
               type="material-icon" 
               name="home" 
+              color={focused ? colors.black : colors.white} 
+              style={focused ? focusedTabStyle : {}}
+              size={30}
+            />
+          ),
+          tabBarItemStyle: {},
+          tabBarStyle: (navigation.getState().routes[1].state?.index ?? 0) > 0
+            ? { display: 'none' }
+            : defaultTabBarStyle,
+        })}
+      />
+      <Tab.Screen 
+        name="School" 
+        component={SchoolStackScreens} 
+        options={({ navigation, route }) => ({
+          tabBarIcon: ({ focused }) => (
+            <Icon 
+              type="material-icon" 
+              name="school" 
               color={focused ? colors.black : colors.white} 
               style={focused ? focusedTabStyle : {}}
               size={30}
