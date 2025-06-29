@@ -12,13 +12,13 @@ import HomeScreen from '../screens/home';
 import ProfileScreen from '../screens/profile';
 import NotificationsScreen from '../screens/notifications';
 import SchoolScreen from '../screens/school';
-
+import CreateSchoolScreen from '../screens/school/createSchool';
 const SchoolStack = createStackNavigator();
 const SchoolStackScreens = () => {
   return (
     <SchoolStack.Navigator screenOptions={{ headerShown: false }} initialRouteName={routenames.School}>
-      {/* <SchoolStack.Screen name={routenames.Home} component={HomeScreen} /> */}
       <SchoolStack.Screen name={routenames.School} component={SchoolScreen} />
+      <SchoolStack.Screen name={routenames.CreateSchool} component={CreateSchoolScreen} />
     </SchoolStack.Navigator>
   )
 }

@@ -22,6 +22,7 @@ const LeInput = ({
   iconType = 'material-community',
   iconName = '',
   touched,
+  multiline = false,
   ...props 
 }: InputProps ) => {
   const [ maskInput, setMaskInput ] = React.useState<boolean>(secureText);
@@ -40,7 +41,8 @@ const LeInput = ({
         <TextInput
           style={[
             styles.textInput,
-            error && styles.errorInput
+            error && styles.errorInput, 
+            multiline && { height: 100, textAlignVertical: 'top' }
           ]} 
           placeholder={placeholder}
           placeholderTextColor={colors.gray}
@@ -91,11 +93,12 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   textInput: {
-    height: 45,
+    minHeight: 40,
     borderRadius: 20,
     padding: 10,
     borderColor: colors.gray,
     width: Dimensions.get('screen').width * 0.64,
+    borderWidth: 1,
   },
   icon: {
     justifyContent: 'center',

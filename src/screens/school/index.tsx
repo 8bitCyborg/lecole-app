@@ -12,13 +12,13 @@ import LeButton from '../../components/leButton';
 import colors from '../../utils/colors';
 
 const SchoolScreen = () => {
-  const navigation = useNavigation<NavigationProp<any>>()
+  const navigation = useNavigation<NavigationProp<any>>();
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
 
-      <TouchableOpacity style={styles.jumbo}>
+      <TouchableOpacity style={styles.jumbo} onPress={() => navigation.navigate(routenames.CreateSchool)}>
         <Text style={styles.text}>You have not set up a school yet...</Text>
         <Text style={styles.text}>Tap here to begin setting up your school.</Text>
       </TouchableOpacity>
