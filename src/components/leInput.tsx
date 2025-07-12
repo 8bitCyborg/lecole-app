@@ -96,9 +96,7 @@ const styles = StyleSheet.create({
     minHeight: 40,
     borderRadius: 20,
     padding: 10,
-    borderColor: colors.gray,
     width: Dimensions.get('screen').width * 0.64,
-    borderWidth: 1,
   },
   icon: {
     justifyContent: 'center',

@@ -13,7 +13,7 @@ import { setAuth } from "../../store/slices/authSlice";
 import { useDispatch } from "react-redux";
 
 const LoginSchema = Yup.object().shape({
-  login_id: Yup.string()
+  email: Yup.string()
     .email('Invalid email address')
     .required('Email is required'),
   password: Yup.string()
@@ -25,7 +25,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const [ login, { isLoading, isError } ] = LeApi.useLoginMutation();
 
-  const handleSubmit = async (values: { login_id: string; password: string }) => {
+  const handleSubmit = async (values: { email: string; password: string }) => {
     try {
       const response: any = await login(values);
       if(response.data.status === 200) {
@@ -46,7 +46,7 @@ const Login = () => {
       
       <Formik
         initialValues={{
-          login_id: '',
+          email: '',
           password: '',
         }}
         validationSchema={LoginSchema}
@@ -57,10 +57,10 @@ const Login = () => {
             <LeInput 
               label="Email"
               placeholder="user@email.com"
-              onChangeText={handleChange('login_id')}
-              onBlur={handleBlur('login_id')}
-              value={values.login_id}
-              error={touched.login_id && errors.login_id}
+              onChangeText={handleChange('email')}
+              onBlur={handleBlur('email')}
+              value={values.email}
+              error={touched.email && errors.email}
               keyboardType="email-address"
               autoCapitalize="none"
               iconName="person"
