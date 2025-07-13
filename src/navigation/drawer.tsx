@@ -59,7 +59,7 @@ const DrawerContent = ({ navigation, closeDrawer }: { navigation: any; closeDraw
             closeDrawer();
           }}
         >
-          <Icon name="home" type="material-icon" size={24} color={colors.white} />
+          <Icon name="google-classroom" type="material-community" size={24} color={colors.white} />
           <Text style={{ color: colors.white, fontSize: 16, marginLeft: 15 }}>Classes</Text>
         </TouchableOpacity>
 
@@ -70,7 +70,7 @@ const DrawerContent = ({ navigation, closeDrawer }: { navigation: any; closeDraw
             closeDrawer();
           }}
         >
-          <Icon name="school" type="material-icon" size={24} color={colors.white} />
+          <Icon name="bookshelf" type="material-community" size={24} color={colors.white} />
           <Text style={{ color: colors.white, fontSize: 16, marginLeft: 15 }}>Subjects</Text>
         </TouchableOpacity>
 
@@ -81,7 +81,7 @@ const DrawerContent = ({ navigation, closeDrawer }: { navigation: any; closeDraw
             closeDrawer();
           }}
         >
-          <Icon name="notifications" type="material-icon" size={24} color={colors.white} />
+          <Icon name="school" type="material-community" size={24} color={colors.white} />
           <Text style={{ color: colors.white, fontSize: 16, marginLeft: 15 }}>Students</Text>
         </TouchableOpacity>
 
@@ -102,7 +102,7 @@ const DrawerContent = ({ navigation, closeDrawer }: { navigation: any; closeDraw
             closeDrawer();
           }}
         >
-          <Icon name="person" type="material-icon" size={24} color={colors.white} />
+          <Icon name="people" type="material-icon" size={24} color={colors.white} />
           <Text style={{ color: colors.white, fontSize: 16, marginLeft: 15 }}>Staff</Text>
         </TouchableOpacity>
         <TouchableOpacity 
@@ -112,9 +112,10 @@ const DrawerContent = ({ navigation, closeDrawer }: { navigation: any; closeDraw
             closeDrawer();
           }}
         >
-          <Icon name="person" type="material-icon" size={24} color={colors.white} />
+          <Icon name="money-bill-wave" type="font-awesome-5" size={24} color={colors.white} />
           <Text style={{ color: colors.white, fontSize: 16, marginLeft: 15 }}>Finances</Text>
         </TouchableOpacity>
+
         <TouchableOpacity 
           style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 15 }}
           onPress={() => {
@@ -122,9 +123,10 @@ const DrawerContent = ({ navigation, closeDrawer }: { navigation: any; closeDraw
             closeDrawer();
           }}
         >
-          <Icon name="person" type="material-icon" size={24} color={colors.white} />
+          <Icon name="event" type="material-icon" size={24} color={colors.white} />
           <Text style={{ color: colors.white, fontSize: 16, marginLeft: 15 }}>Events</Text>
         </TouchableOpacity>
+
         <TouchableOpacity 
           style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 15 }}
           onPress={() => {
@@ -132,7 +134,7 @@ const DrawerContent = ({ navigation, closeDrawer }: { navigation: any; closeDraw
             closeDrawer();
           }}
         >
-          <Icon name="person" type="material-icon" size={24} color={colors.white} />
+          <Icon name="archive" type="entypo" size={24} color={colors.white} />
           <Text style={{ color: colors.white, fontSize: 16, marginLeft: 15 }}>Archives</Text>
         </TouchableOpacity>
       </View>
@@ -148,7 +150,7 @@ const DrawerContent = ({ navigation, closeDrawer }: { navigation: any; closeDraw
             dispatch(resetAuth())
           }}
         >
-          <Icon name="help" type="material-icon" size={24} color={colors.white} />
+          <Icon name="logout" type="simple-line-icon" size={24} color={colors.white} />
           <Text style={{ color: colors.white, fontSize: 16, marginLeft: 15 }}>Logout</Text>
         </TouchableOpacity>
       </View>

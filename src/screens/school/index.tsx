@@ -19,26 +19,6 @@ const HomeScreen = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.sectionCard}>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between'}}>
-          <Text style={[styles.text, {fontSize: 15 }]}>Welcome, {user.firstName}</Text>
-          <Text style={styles.text}>{moment().format("MMMM Do, YYYY")}</Text>
-        </View>
-
-        <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start', paddingVertical: 10, marginTop: 5 }}>
-          <Icon 
-            name="feed-person"
-            type="octicon"
-            size={50}
-            color={colors.white}
-          />
-          <View style={{ flexDirection: 'column', marginLeft: 12 }}>
-            <Text style={styles.text}>{user?.email}</Text>
-            <Text style={styles.text}>{user?.phone}</Text>
-            <Text style={[styles.text, { textTransform: "capitalize"}]}>{user?.role}</Text>
-          </View>
-        </View>
-      </View>
 
       <View style={styles.sectionCard}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>

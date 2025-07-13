@@ -4,14 +4,11 @@ import colors from "../../utils/colors";
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
-    flex: 1,
-    minHeight: Dimensions.get('screen').height,
     width: Dimensions.get('screen').width,
-    paddingTop: Dimensions.get('screen').height * 0.1,
+    paddingVertical: Dimensions.get('screen').height * 0.05,
     paddingHorizontal: 10,
   },
   sectionCard: {
-    marginBottom: 20,
     minHeight: Dimensions.get('screen').height * 0.15,
     borderRadius: 20,
     backgroundColor: colors.blue,

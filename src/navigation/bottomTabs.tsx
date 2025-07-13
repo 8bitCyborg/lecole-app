@@ -17,7 +17,7 @@ import SchoolScreen from '../screens/school';
 import CreateSchoolScreen from '../screens/school/createSchool';
 
 // Create a wrapper component for each screen to add the header with menu button
-const ScreenWrapper = ({ children, title }: { children: React.ReactNode; title: string }) => {
+const ScreenWrapper = ({ children, title, headerStyle }: { children: React.ReactNode; title?: string, headerStyle?: any }) => {
   const navigation = useNavigation();
   const drawerRef = React.useRef<DrawerLayout>(null);
 
@@ -25,21 +25,24 @@ const ScreenWrapper = ({ children, title }: { children: React.ReactNode; title: 
     <DrawerLayout
       ref={drawerRef}
       drawerWidth={280}
-      drawerPosition="left"
-      drawerType="front"
+      drawerPosition='left'
+      drawerType='slide'
       drawerBackgroundColor={colors.blue}
       renderNavigationView={() => <DrawerContent navigation={navigation} closeDrawer={() => drawerRef.current?.closeDrawer()} />}
     >
       <View style={{ flex: 1, backgroundColor: colors.white }}>
         {/* Header with Menu Button */}
-        <View style={{ 
-          flexDirection: 'row', 
-          alignItems: 'center', 
-          paddingHorizontal: 20, 
-          paddingTop: 50, 
-          paddingBottom: 15,
-          backgroundColor: colors.blue
-        }}>
+        <View style={[
+            { 
+              flexDirection: 'row', 
+              alignItems: 'center', 
+              paddingHorizontal: 20, 
+              paddingTop: 50, 
+              paddingBottom: 15,
+              backgroundColor: colors.blue
+            },
+            headerStyle,
+        ]}>
           <TouchableOpacity
             onPress={() => drawerRef.current?.openDrawer()}
             style={{ marginRight: 15 }}
@@ -58,25 +61,25 @@ const ScreenWrapper = ({ children, title }: { children: React.ReactNode; title: 
 
 // Wrapped screen components
 const HomeScreenWrapper = () => (
-  <ScreenWrapper title="Dashboard">
+  <ScreenWrapper>
     <HomeScreen />
   </ScreenWrapper>
 );
 
 const SchoolScreenWrapper = () => (
-  <ScreenWrapper title="School">
+  <ScreenWrapper>
     <SchoolStackScreens />
   </ScreenWrapper>
 );
 
 const NotificationsScreenWrapper = () => (
-  <ScreenWrapper title="Notifications">
+  <ScreenWrapper>
     <NotificationsScreen />
   </ScreenWrapper>
 );
 
 const ProfileScreenWrapper = () => (
-  <ScreenWrapper title="Profile">
+  <ScreenWrapper headerStyle={{ backgroundColor: colors.blue }}>
     <ProfileScreen />
   </ScreenWrapper>
 );
