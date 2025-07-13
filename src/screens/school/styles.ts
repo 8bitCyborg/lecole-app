@@ -1,51 +1,53 @@
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet, Dimensions} from "react-native";
 import colors from "../../utils/colors";
 
 const styles = StyleSheet.create({
   container: {
+    display: 'flex',
+    flex: 1,
     minHeight: Dimensions.get('screen').height,
     width: Dimensions.get('screen').width,
+    paddingTop: Dimensions.get('screen').height * 0.1,
+    paddingHorizontal: 10,
+  },
+  sectionCard: {
+    marginBottom: 20,
+    minHeight: Dimensions.get('screen').height * 0.15,
+    borderRadius: 20,
+    backgroundColor: colors.blue,
     display: 'flex',
-    paddingVertical: Dimensions.get('screen').height * 0.12,
+    flexDirection: 'column',
+    padding: 20,
+    shadowColor: colors.red,
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 8, // For Android
+  },
+  pill: {
+    backgroundColor: colors.white,
     paddingHorizontal: 20,
-    // justifyContent: 'center',
-    alignItems: 'center',
+    paddingVertical: 1,
+    borderRadius: 20,
+    color: colors.red,
   },
   text: {
-    color: colors.blue,
-    fontSize: 18,
-    fontFamily: 'Poppins-Regular',
+    color: colors.white,
+    fontFamily: 'Poppins',
+    fontWeight: '700'
   },
-  jumbo: {
-    minHeight: Dimensions.get('screen').height * 0.15,
-    width: '100%',
-    borderRadius: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: colors.white,
-    flexDirection: 'column',
-    borderWidth: 1,
-    borderColor: colors.blue,
+  actionBtn: {
+    position: 'absolute',
+    bottom: Dimensions.get('screen').height * 0.15,
+    right: 20,
+    height: 50,
+    width: 50,
+    borderWidth: 10,
+    borderRadius: 50,
   },
-  row: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    width: '100%',
-    marginVertical: 10,
-  },
-  rowItem: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '48%',
-    borderWidth: 1,
-    borderColor: colors.blue,
-    minHeight: Dimensions.get('screen').height * 0.2,
-    borderRadius: 20,
-  }
 });
 
 export default styles;

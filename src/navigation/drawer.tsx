@@ -7,12 +7,17 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { Icon } from '@rneui/themed';
-import { useSelector } from 'react-redux';
+import { 
+  useSelector, 
+  useDispatch 
+} from 'react-redux';
+import { resetAuth } from '../store/slices/authSlice';
 import colors from '../utils/colors';
 import routenames from './routenames';
 
 const DrawerContent = ({ navigation, closeDrawer }: { navigation: any; closeDrawer: () => void }) => {
   const user = useSelector((state: any) => state?.auth?.user);
+  const dispatch = useDispatch();
 
   return (
     <ScrollView
@@ -21,7 +26,7 @@ const DrawerContent = ({ navigation, closeDrawer }: { navigation: any; closeDraw
     >
       <View style={{ paddingTop: 50 }}>
       {/* User Profile Section */}
-      <View style={{ padding: 20, borderBottomWidth: 1, borderBottomColor: colors.white }}>
+      <View style={{ padding: 20 }}>
         <View style={{ flexDirection: 'row', alignItems: 'center',  }}>
           <Icon 
             name="account-circle"
@@ -43,18 +48,10 @@ const DrawerContent = ({ navigation, closeDrawer }: { navigation: any; closeDraw
         </View>
       </View>
 
+      <View style={{ width: '100%', height: 1, backgroundColor: colors.white, marginVertical: 20,}}></View>
+
       {/* Navigation Menu */}
       <View style={{ paddingHorizontal: 20 }}>
-        <TouchableOpacity 
-          style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 15 }}
-          onPress={() => {
-            navigation.navigate(routenames.Home);
-            closeDrawer();
-          }}
-        >
-          <Icon name="home" type="material-icon" size={24} color={colors.white} />
-          <Text style={{ color: colors.white, fontSize: 16, marginLeft: 15 }}>Dashboard</Text>
-        </TouchableOpacity>
         <TouchableOpacity 
           style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 15 }}
           onPress={() => {
@@ -143,27 +140,16 @@ const DrawerContent = ({ navigation, closeDrawer }: { navigation: any; closeDraw
       <View style={{ width: '100%', height: 1, backgroundColor: colors.white, marginVertical: 20,}}></View>
 
       {/* Settings Section */}
-      <View style={{ paddingHorizontal: 20 }}>
-        <TouchableOpacity 
-          style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 15 }}
-          onPress={() => {
-            // Navigate to Settings screen
-            closeDrawer();
-          }}
-        >
-          <Icon name="settings" type="material-icon" size={24} color={colors.white} />
-          <Text style={{ color: colors.white, fontSize: 16, marginLeft: 15 }}>Settings</Text>
-        </TouchableOpacity>
+      <View style={{ paddingHorizontal: 20, position: 'absolute', bottom: -90 }}>
 
         <TouchableOpacity 
           style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 15 }}
           onPress={() => {
-            // Navigate to Help & Support screen
-            closeDrawer();
+            dispatch(resetAuth())
           }}
         >
           <Icon name="help" type="material-icon" size={24} color={colors.white} />
-          <Text style={{ color: colors.white, fontSize: 16, marginLeft: 15 }}>Help & Support</Text>
+          <Text style={{ color: colors.white, fontSize: 16, marginLeft: 15 }}>Logout</Text>
         </TouchableOpacity>
       </View>
       </View>

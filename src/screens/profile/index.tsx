@@ -11,7 +11,6 @@ const ProfileScreen = () => {
   return(
     <ScrollView contentContainerStyle={styles.container}>
       <Text>Settings Screen</Text>
-      <LeButton title="Logout" onPress={() => dispatch(resetAuth())} btnStyle={styles.logoutBtn} />
     </ScrollView>
   );
 };

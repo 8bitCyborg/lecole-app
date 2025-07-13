@@ -1,161 +1,104 @@
-import React, { useState } from 'react';
-import { ScrollView, View, Text, TouchableOpacity, Dimensions, StyleSheet } from 'react-native';
-import { Icon } from '@rneui/themed';
+import React from 'react';
+import { ScrollView, View, Text, TouchableOpacity, Touchable } from 'react-native';
 import styles from './styles';
+import { Icon } from '@rneui/themed';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import routenames from '../../navigation/routenames';
 import LeActionBtn from '../../components/leActionBtn';
-import LeModal from '../../components/leModal';
-import { Formik } from 'formik';
-import LeInput from '../../components/leInput';
-import LeButton from '../../components/leButton';
+import { useSelector } from 'react-redux';
+import moment from 'moment';
 import colors from '../../utils/colors';
+import LeApi from '../../store/api/leApi';
 
-const SchoolScreen = () => {
+const HomeScreen = () => {
   const navigation = useNavigation<NavigationProp<any>>();
-  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+  const user = useSelector((state: any) => state?.auth?.user);
+  const { data: schoolData } = LeApi.useGetSchoolsQuery<any>(`${user.schoolId}`,{});
+  const { data: sessionData, error: sessionError } = LeApi.useGetSessionsQuery<any>(`${user.schoolId}`, {});
+  const activeTerm = sessionData?.[0]?.termsId?.filter((term: any) => term.status === 'active')[0];
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-
-      <TouchableOpacity style={styles.jumbo} onPress={() => navigation.navigate(routenames.CreateSchool)}>
-        <Text style={styles.text}>You have not set up a school yet...</Text>
-        <Text style={styles.text}>Tap here to begin setting up your school.</Text>
-      </TouchableOpacity>
-
-      <View style={{ marginTop: 30 }}>
-        <View style={styles.row}>
-          <View style={styles.rowItem}>
-            <Icon
-              name="groups"
-              size={50}
-              color={colors.blue}
-            />
-          </View>
-          <View style={styles.rowItem}>
-            <Icon
-              name='piechart'
-              type="antdesign"
-              size={50}
-              color={colors.blue}
-            />
-          </View>
+      <View style={styles.sectionCard}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between'}}>
+          <Text style={[styles.text, {fontSize: 15 }]}>Welcome, {user.firstName}</Text>
+          <Text style={styles.text}>{moment().format("MMMM Do, YYYY")}</Text>
         </View>
 
-        <View style={styles.row}>
-          <View style={styles.rowItem}>
-            <Icon
-              name="barchart"
-              type="antdesign"
-              size={50}
-              color={colors.blue}
-            />
-          </View>
-          <View style={styles.rowItem}>
-            <Icon
-              name="finance"
-              type="material-community"
-              size={50}
-              color={colors.blue}
-            />
+        <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start', paddingVertical: 10, marginTop: 5 }}>
+          <Icon 
+            name="feed-person"
+            type="octicon"
+            size={50}
+            color={colors.white}
+          />
+          <View style={{ flexDirection: 'column', marginLeft: 12 }}>
+            <Text style={styles.text}>{user?.email}</Text>
+            <Text style={styles.text}>{user?.phone}</Text>
+            <Text style={[styles.text, { textTransform: "capitalize"}]}>{user?.role}</Text>
           </View>
         </View>
       </View>
-      
-      {/* <LeActionBtn 
-        onPress={() => {setIsModalVisible(true)}}
-        icon_name='book-plus'
-      /> */}
 
-      {/* <LeModal 
-        hideModal={() => {setIsModalVisible(false)}}
-        isVisible={isModalVisible}
-        modalTitle='Set Up Your School'
-        childrenContainerStyle={{minHeight: Dimensions.get('screen').height *0.85}}
-      >
-        <Text>Fill the form below to begin setting up your school.</Text> */}
-        {/* <Formik
-          initialValues={{
-            schoolName: '',
-            schoolType: '',
-            schoolAddress: '',
-            schoolPhone: '',
-            schoolEmail: '',
-          }}
-          onSubmit={(values) => {
-            console.log(values);
-          }}
-        >
-          {({handleChange, handleBlur, handleSubmit, values}) => (
-            <View>
-              <LeInput
-                placeholder='Enter School Name'
-                value={values.schoolName}
-                onChangeText={handleChange('schoolName')}
-                onBlur={handleBlur('schoolName')}
-                label='School Name'
-              />
-              <LeInput
-                placeholder='Enter School Type'
-                value={values.schoolType}
-                onChangeText={handleChange('schoolType')}
-                onBlur={handleBlur('schoolType')}
-                label='School Type'
-              />
-              <LeInput
-                placeholder='Enter School Type'
-                value={values.schoolType}
-                onChangeText={handleChange('schoolType')}
-                onBlur={handleBlur('schoolType')}
-                label='School Type'
-              />
-              <LeInput
-                placeholder='Enter School Type'
-                value={values.schoolType}
-                onChangeText={handleChange('schoolType')}
-                onBlur={handleBlur('schoolType')}
-                label='School Type'
-              />
-              <LeInput
-                placeholder='Enter School Address'
-                value={values.schoolAddress}
-                onChangeText={handleChange('schoolAddress')}
-                onBlur={handleBlur('schoolAddress')}
-                label='School Address'
-              /> 
-              <LeInput
-                placeholder='Enter School Phone'
-                value={values.schoolPhone}
-                onChangeText={handleChange('schoolPhone')}
-                onBlur={handleBlur('schoolPhone')}
-                label='School Phone'
-                keyboardType='phone-pad'
-                keyboardAppearance='dark'
-              />
-              <LeInput
-                placeholder='Enter School Email'
-                value={values.schoolEmail}
-                onChangeText={handleChange('schoolEmail')}
-                onBlur={handleBlur('schoolEmail')}
-                label='School Email'
-                keyboardType='email-address'
-              />
-              <LeButton
-                title='Save'
-                onPress={handleSubmit}
-              />
-            </View>
-          )}
-        </Formik> */}
-      {/* </LeModal> */}
+      <View style={styles.sectionCard}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+          <Text style={[styles.text, {fontSize: 15 }]}>{schoolData?.name}</Text>
+          <Text style={[{textTransform: 'capitalize'}, styles.pill]}>{schoolData?.subscriptionStatus}</Text>
+        </View>
+        <Text style={styles.text}>{sessionData?.[0]?.year} Academic Session</Text>
+        <Text style={[styles.text, {textTransform: 'capitalize'}]}>{activeTerm?.name} Term</Text>
+        <View style={{margin: 5, flexDirection: 'row', justifyContent: "space-between", marginTop: 20 }}>
+          <Icon 
+            name="school"
+            type="material-icon"
+            color={colors.white}
+            size={40}
+          />
+          <View style={{width: '50%'}}>
+            <Text style={styles.text}>Total Staff Count</Text>
+            <Text style={[styles.text, { fontSize: 20}]}>{(schoolData as any)?.staff?.length || 0}</Text>
+          </View>
+
+          <TouchableOpacity>
+            <Icon
+              name="pencil-circle-outline"
+              type="material-community"
+              color={colors.white}
+              size={30}
+            />
+          </TouchableOpacity>
+
+        </View>
+
+        <View style={{margin: 5, flexDirection: 'row', justifyContent: "space-between", marginTop: 20 }}>
+          <Icon 
+            name="chalkboard-teacher"
+            type="font-awesome-5"
+            color={colors.white}
+            size={30}
+          />
+          <View style={{width: '50%'}}>
+            <Text style={styles.text}>Total Student Count</Text>
+            <Text style={[styles.text, { fontSize: 20}]}>{(schoolData as any)?.students?.length || 0}</Text>
+          </View>
+
+          <TouchableOpacity>
+            <Icon
+              name="pencil-circle-outline"
+              type="material-community"
+              color={colors.white}
+              size={30}
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
+
+      {/* <LeActionBtn 
+        onPress={() => navigation.navigate(routenames.School)}
+        icon_name='school'
+      /> */}
     </ScrollView>
   );
 };
 
-export default SchoolScreen;
-
-// const modalStyles = StyleSheet.create({
-//   modalContent: {
-//     minHeight: Dimensions.get('screen').height * 0.85,
-//   },
-// });
+export default HomeScreen; 
