@@ -1,12 +1,14 @@
 import React from 'react';
-import { Dimensions } from 'react-native';
+import { Dimensions, View, TouchableOpacity, Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
+import { DrawerLayout } from 'react-native-gesture-handler';
 import colors from '../utils/colors';
 import Icon from '@rneui/themed/dist/Icon';
 import routenames from './routenames';
+import DrawerContent from './drawer';
 
 import HomeScreen from '../screens/home';
 import ProfileScreen from '../screens/profile';
@@ -14,6 +16,70 @@ import NotificationsScreen from '../screens/notifications';
 import SchoolScreen from '../screens/school';
 import CreateSchoolScreen from '../screens/school/createSchool';
 
+// Create a wrapper component for each screen to add the header with menu button
+const ScreenWrapper = ({ children, title }: { children: React.ReactNode; title: string }) => {
+  const navigation = useNavigation();
+  const drawerRef = React.useRef<DrawerLayout>(null);
+
+  return (
+    <DrawerLayout
+      ref={drawerRef}
+      drawerWidth={280}
+      drawerPosition="left"
+      drawerType="front"
+      drawerBackgroundColor={colors.blue}
+      renderNavigationView={() => <DrawerContent navigation={navigation} closeDrawer={() => drawerRef.current?.closeDrawer()} />}
+    >
+      <View style={{ flex: 1, backgroundColor: colors.white }}>
+        {/* Header with Menu Button */}
+        <View style={{ 
+          flexDirection: 'row', 
+          alignItems: 'center', 
+          paddingHorizontal: 20, 
+          paddingTop: 50, 
+          paddingBottom: 15,
+          backgroundColor: colors.blue
+        }}>
+          <TouchableOpacity
+            onPress={() => drawerRef.current?.openDrawer()}
+            style={{ marginRight: 15 }}
+          >
+            <Icon name="menu" type="material-icon" size={30} color={colors.white} />
+          </TouchableOpacity>
+          <Text style={{ color: colors.white, fontSize: 20, fontWeight: 'bold' }}>
+            {title}
+          </Text>
+        </View>
+        {children}
+      </View>
+    </DrawerLayout>
+  );
+};
+
+// Wrapped screen components
+const HomeScreenWrapper = () => (
+  <ScreenWrapper title="Dashboard">
+    <HomeScreen />
+  </ScreenWrapper>
+);
+
+const SchoolScreenWrapper = () => (
+  <ScreenWrapper title="School">
+    <SchoolStackScreens />
+  </ScreenWrapper>
+);
+
+const NotificationsScreenWrapper = () => (
+  <ScreenWrapper title="Notifications">
+    <NotificationsScreen />
+  </ScreenWrapper>
+);
+
+const ProfileScreenWrapper = () => (
+  <ScreenWrapper title="Profile">
+    <ProfileScreen />
+  </ScreenWrapper>
+);
 
 const SchoolStack = createStackNavigator();
 const SchoolStackScreens = () => {
@@ -66,7 +132,7 @@ const BottomTabs = () => {
     >
       <Tab.Screen 
         name="Home" 
-        component={HomeScreen} 
+        component={HomeScreenWrapper} 
         options={({ navigation, route }) => ({
           tabBarIcon: ({ focused }) => (
             <Icon 
@@ -85,7 +151,7 @@ const BottomTabs = () => {
       />
       <Tab.Screen 
         name="School" 
-        component={SchoolStackScreens} 
+        component={SchoolScreenWrapper} 
         options={({ navigation, route }) => ({
           tabBarIcon: ({ focused }) => (
             <Icon 
@@ -104,7 +170,7 @@ const BottomTabs = () => {
       />
       <Tab.Screen 
         name="Notifications" 
-        component={NotificationsScreen} 
+        component={NotificationsScreenWrapper} 
         options={({ navigation, route }) => ({
           tabBarIcon: ({ focused }) => (
             <Icon 
@@ -123,14 +189,14 @@ const BottomTabs = () => {
       />
       <Tab.Screen 
         name="Profile" 
-        component={ProfileScreen} 
+        component={ProfileScreenWrapper} 
         options={({ navigation, route }) => ({
           tabBarIcon: ({ focused }) => (
             <Icon 
               type="material-icon" 
               name="person" 
               color={focused ? colors.blue : colors.white} 
-              style={focused ? focusedTabStyle: {}}
+              style={focused ? focusedTabStyle : {}}
               size={30}
             />
           ),

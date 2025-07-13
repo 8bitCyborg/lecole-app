@@ -1,4 +1,5 @@
 import React from 'react';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import NavigationIndex from './src/navigation';
 import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
 import { Provider } from 'react-redux';
@@ -11,15 +12,17 @@ function App(): React.JSX.Element {
   const navigationRef = useNavigationContainerRef();
 
   return (
-    <ApiProvider api={leApi}>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <NavigationContainer ref={navigationRef}>
-            <NavigationIndex />
-          </NavigationContainer>
-        </PersistGate>
-      </Provider>
-    </ApiProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <ApiProvider api={leApi}>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <NavigationContainer ref={navigationRef}>
+              <NavigationIndex />
+            </NavigationContainer>
+          </PersistGate>
+        </Provider>
+      </ApiProvider>
+    </GestureHandlerRootView>
   );
 };
 
