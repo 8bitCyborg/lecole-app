@@ -13,6 +13,8 @@ import ProfileScreen from '../screens/profile';
 import NotificationsScreen from '../screens/notifications';
 import SchoolScreen from '../screens/school';
 import CreateSchoolScreen from '../screens/school/createSchool';
+
+
 const SchoolStack = createStackNavigator();
 const SchoolStackScreens = () => {
   return (
@@ -20,8 +22,8 @@ const SchoolStackScreens = () => {
       <SchoolStack.Screen name={routenames.School} component={SchoolScreen} />
       <SchoolStack.Screen name={routenames.CreateSchool} component={CreateSchoolScreen} />
     </SchoolStack.Navigator>
-  )
-}
+  );
+};
 
 type BottomTabParamList = {
   Home: undefined;
@@ -33,9 +35,9 @@ type BottomTabParamList = {
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 const defaultTabBarStyle = {
-  backgroundColor: colors.black,
+  backgroundColor: colors.blue,
   position: 'absolute' as const,
-  height: 100,
+  height: Dimensions.get('screen').height * 0.1,
   width: Dimensions.get('screen').width * 0.99,
   alignSelf: 'center',
   marginLeft: 2,
@@ -70,7 +72,7 @@ const BottomTabs = () => {
             <Icon 
               type="material-icon" 
               name="home" 
-              color={focused ? colors.black : colors.white} 
+              color={focused ? colors.blue : colors.white} 
               style={focused ? focusedTabStyle : {}}
               size={30}
             />
@@ -89,7 +91,7 @@ const BottomTabs = () => {
             <Icon 
               type="material-icon" 
               name="school" 
-              color={focused ? colors.black : colors.white} 
+              color={focused ? colors.blue : colors.white} 
               style={focused ? focusedTabStyle : {}}
               size={30}
             />
@@ -108,7 +110,7 @@ const BottomTabs = () => {
             <Icon 
               type="material-icon" 
               name="notifications" 
-              color={focused ? colors.black : colors.white} 
+              color={focused ? colors.blue : colors.white} 
               style={focused ? focusedTabStyle : {}}
               size={30}
             />
@@ -127,7 +129,7 @@ const BottomTabs = () => {
             <Icon 
               type="material-icon" 
               name="person" 
-              color={focused ? colors.black : colors.white} 
+              color={focused ? colors.blue : colors.white} 
               style={focused ? focusedTabStyle: {}}
               size={30}
             />

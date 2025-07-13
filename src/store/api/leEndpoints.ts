@@ -10,6 +10,16 @@ const endpoints = [
     method: 'POST',
     url: '/auth/register',
   },
+  {
+    name: 'GetSchools',
+    method: 'GET',
+    url: '/schools'
+  },
+  {
+    name: 'GetSessions',
+    method: 'GET',
+    url: '/sessions'
+  },
 ];
 
 export default endpoints;

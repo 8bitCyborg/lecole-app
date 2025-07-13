@@ -28,13 +28,14 @@ const Login = () => {
   const handleSubmit = async (values: { email: string; password: string }) => {
     try {
       const response: any = await login(values);
+      console.log('resp', response.data.data.role);
       if(response.data.status === 200) {
         dispatch(setAuth({
           isLoggedIn: true,
-          user: response.data.user,
-          access_token: response.data.access_token,
+          user: response.data.data,
+          access_token: response.data.data.access_token,
         }));
-      } 
+      };
     } catch (error) {
       console.error('Login error:', error);
     }
