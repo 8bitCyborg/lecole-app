@@ -5,7 +5,9 @@ const routenames = {
   
   Home: 'Home',
   Dashboard: 'Dashboard',
-  CreateSchool: 'CreateSchool',
+  Notifications: 'Notifications',
+  Profile: 'Profile',
+  ClassRoom: 'ClassRoom',
 };
 
 export default routenames;

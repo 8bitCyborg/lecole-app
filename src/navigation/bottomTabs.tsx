@@ -9,55 +9,22 @@ import colors from '../utils/colors';
 import Icon from '@rneui/themed/dist/Icon';
 import routenames from './routenames';
 import DrawerContent from './drawer';
+import { ScreenWrapper } from './drawer';
 
 import HomeScreen from '../screens/home';
 import ProfileScreen from '../screens/profile';
 import NotificationsScreen from '../screens/notifications';
 import Dashboard from '../screens/dashboard';
-// import CreateSchoolScreen from '../screens/dashboard/createSchool';
+import ClassRoom from '../screens/class';
 
-// Create a wrapper component for each screen to add the header with menu button
-const ScreenWrapper = ({ children, title, headerStyle }: { children: React.ReactNode; title?: string, headerStyle?: any }) => {
-  const navigation = useNavigation();
-  const drawerRef = React.useRef<DrawerLayout>(null);
-
-  return (
-    <DrawerLayout
-      ref={drawerRef}
-      drawerWidth={280}
-      drawerPosition='left'
-      drawerType='slide'
-      drawerBackgroundColor={colors.blue}
-      renderNavigationView={() => <DrawerContent navigation={navigation} closeDrawer={() => drawerRef.current?.closeDrawer()} />}
-    >
-      <View style={{ flex: 1, backgroundColor: colors.white }}>
-        {/* Header with Menu Button */}
-        <View style={[
-            { 
-              flexDirection: 'row', 
-              alignItems: 'center', 
-              paddingHorizontal: 20, 
-              paddingTop: 50, 
-              paddingBottom: 15,
-              backgroundColor: colors.blue
-            },
-            headerStyle,
-        ]}>
-          <TouchableOpacity
-            onPress={() => drawerRef.current?.openDrawer()}
-            style={{ marginRight: 15 }}
-          >
-            <Icon name="menu" type="material-icon" size={30} color={colors.white} />
-          </TouchableOpacity>
-          <Text style={{ color: colors.white, fontSize: 20, fontWeight: 'bold' }}>
-            {title}
-          </Text>
-        </View>
-        {children}
-      </View>
-    </DrawerLayout>
+const withScreenWrapper = (Component: React.ComponentType<any>, wrapperProps = {}) => {
+  return (props: any) => (
+    <ScreenWrapper {...wrapperProps}>
+      <Component {...props} />
+    </ScreenWrapper>
   );
 };
+
 
 // Wrapped screen components
 const HomeScreenWrapper = () => (
@@ -89,7 +56,7 @@ const DashboardStackScreens = () => {
   return (
     <DashboardStack.Navigator screenOptions={{ headerShown: false }} initialRouteName={routenames.Dashboard}>
       <DashboardStack.Screen name={routenames.Dashboard} component={Dashboard} />
-      {/* <SchoolStack.Screen name={routenames.CreateSchool} component={CreateSchoolScreen} /> */}
+      <DashboardStack.Screen name={routenames.ClassRoom} component={ClassRoom} />
     </DashboardStack.Navigator>
   );
 };
@@ -148,7 +115,7 @@ const BottomTabs = () => {
           ),
           tabBarItemStyle: {},
           tabBarStyle: (navigation.getState().routes[1].state?.index ?? 0) > 0
-            ? { display: 'none' }
+            ? defaultTabBarStyle
             : defaultTabBarStyle,
         })}
       />
@@ -167,7 +134,7 @@ const BottomTabs = () => {
           ),
           tabBarItemStyle: {},
           tabBarStyle: (navigation.getState().routes[1].state?.index ?? 0) > 0
-            ? { display: 'none' }
+            ? defaultTabBarStyle
             : defaultTabBarStyle,
         })}
       />
@@ -186,7 +153,7 @@ const BottomTabs = () => {
           ),
           tabBarItemStyle: {},
           tabBarStyle: (navigation.getState().routes[1].state?.index ?? 0) > 0
-            ? { display: 'none' }
+            ? defaultTabBarStyle
             : defaultTabBarStyle,
         })}
       />
@@ -205,7 +172,7 @@ const BottomTabs = () => {
           ),
           tabBarItemStyle: { marginTop: 5 },
           tabBarStyle: (navigation.getState().routes[1].state?.index ?? 0) > 0
-            ? { display: 'none' }
+            ? {  }
             : defaultTabBarStyle,
         })}
       />

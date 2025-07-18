@@ -12,9 +12,54 @@ import {
   useDispatch 
 } from 'react-redux';
 import { resetAuth } from '../store/slices/authSlice';
+import { DrawerLayout } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 import colors from '../utils/colors';
 import fonts from '../utils/fonts';
 import routenames from './routenames';
+
+export const ScreenWrapper = ({ children, title, headerStyle }: { children: React.ReactNode; title?: string, headerStyle?: any }) => {
+  const navigation = useNavigation();
+  const isNested = navigation.getParent();
+  const drawerRef = React.useRef<DrawerLayout>(null);
+
+  return (
+    <DrawerLayout
+      ref={drawerRef}
+      drawerWidth={280}
+      drawerPosition='left'
+      drawerType='slide'
+      drawerBackgroundColor={colors.blue}
+      renderNavigationView={() => <DrawerContent navigation={navigation} closeDrawer={() => drawerRef.current?.closeDrawer()} />}
+    >
+      <View style={{ flex: 1, backgroundColor: colors.white }}>
+        <View style={[
+          { 
+            flexDirection: 'row', 
+            alignItems: 'center', 
+            paddingHorizontal: 20, 
+            paddingTop: 50, 
+            paddingBottom: 15,
+            backgroundColor: colors.blue
+          },
+          headerStyle,
+        ]}>
+          <TouchableOpacity
+            onPress={() => drawerRef.current?.openDrawer()}
+            style={{ marginRight: 15 }}
+          >
+            <Icon name="menu" type="material-icon" size={30} color={colors.white} />
+          </TouchableOpacity>
+
+          <Text style={{ color: colors.white, fontSize: 20, fontWeight: 'bold' }}>
+            {title}
+          </Text>
+        </View>
+        {children}
+      </View>
+    </DrawerLayout>
+  );
+};
 
 const DrawerContent = ({ navigation, closeDrawer }: { navigation: any; closeDrawer: () => void }) => {
   const user = useSelector((state: any) => state?.auth?.user);
@@ -27,7 +72,6 @@ const DrawerContent = ({ navigation, closeDrawer }: { navigation: any; closeDraw
       contentContainerStyle={{ paddingBottom: 90 }}
     >
       <View style={{ paddingTop: 50 }}>
-      {/* User Profile Section */}
       <View style={{ padding: 20 }}>
         <View style={{ flexDirection: 'row', alignItems: 'center',  }}>
           <Icon 
@@ -54,15 +98,16 @@ const DrawerContent = ({ navigation, closeDrawer }: { navigation: any; closeDraw
 
       {/* Navigation Menu */}
       <View style={{ paddingHorizontal: 20 }}>
+
         <TouchableOpacity 
           style={styles.drawerItem}
           onPress={() => {
-            navigation.navigate('Home');
+            navigation.navigate(routenames.ClassRoom);
             closeDrawer();
           }}
         >
           <Icon name="google-classroom" type="material-community" size={24} color={colors.white} />
-          <Text style={styles.drawerItemText}>Classes</Text>
+          <Text style={styles.drawerItemText}>Class</Text>
         </TouchableOpacity>
 
         <TouchableOpacity 

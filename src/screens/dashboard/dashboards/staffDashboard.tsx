@@ -6,6 +6,7 @@ import { useNavigation, NavigationProp } from '@react-navigation/native';
 import LeApi from '../../../store/api/leApi';
 import styles from '../styles';
 import colors from '../../../utils/colors';
+import routenames from '../../../navigation/routenames';
 
 const StaffDashboard = () => {
   const navigation = useNavigation<NavigationProp<any>>();
@@ -37,7 +38,10 @@ const StaffDashboard = () => {
             <Text style={[styles.text, { fontSize: 20}]}>{(schoolData as any)?.staff?.length || 0}</Text>
           </View>
 
-          <TouchableOpacity style={styles.sectionCardBtn}>
+          <TouchableOpacity 
+            style={styles.sectionCardBtn}
+            onPress={() => navigation.navigate(routenames.ClassRoom)}
+          >
             <Text style={{ color: colors.black }}>View</Text>
           </TouchableOpacity>
         </View>
