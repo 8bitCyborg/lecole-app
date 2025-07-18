@@ -4,7 +4,7 @@ const routenames = {
   SignUp: 'SignUp',
   
   Home: 'Home',
-  School: 'School',
+  Dashboard: 'Dashboard',
   CreateSchool: 'CreateSchool',
 };
 

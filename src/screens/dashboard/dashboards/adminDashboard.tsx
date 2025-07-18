@@ -1,16 +1,16 @@
 import React from 'react';
 import { ScrollView, View, Text, TouchableOpacity, Touchable } from 'react-native';
-import styles from './styles';
+import styles from '../styles';
 import { Icon } from '@rneui/themed';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
-import routenames from '../../navigation/routenames';
-import LeActionBtn from '../../components/leActionBtn';
+// import routenames from '../../navigation/routenames';
+// import LeActionBtn from '../../components/leActionBtn';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
-import colors from '../../utils/colors';
-import LeApi from '../../store/api/leApi';
+import colors from '../../../utils/colors';
+import LeApi from '../../../store/api/leApi';
 
-const HomeScreen = () => {
+const AdminDashboard = () => {
   const navigation = useNavigation<NavigationProp<any>>();
   const user = useSelector((state: any) => state?.auth?.user);
   const { data: schoolData } = LeApi.useGetSchoolsQuery<any>(`${user?.schoolId}`,{});
@@ -18,8 +18,7 @@ const HomeScreen = () => {
   const activeTerm = sessionData?.[0]?.termsId?.filter((term: any) => term.status === 'active')[0];
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-
+    <View>
       <View style={styles.sectionCard}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
           <Text style={[styles.text, {fontSize: 15 }]}>{schoolData?.name}</Text>
@@ -77,8 +76,8 @@ const HomeScreen = () => {
         onPress={() => navigation.navigate(routenames.School)}
         icon_name='school'
       /> */}
-    </ScrollView>
+    </View>
   );
 };
 
-export default HomeScreen; 
+export default AdminDashboard; 

@@ -13,8 +13,8 @@ import DrawerContent from './drawer';
 import HomeScreen from '../screens/home';
 import ProfileScreen from '../screens/profile';
 import NotificationsScreen from '../screens/notifications';
-import SchoolScreen from '../screens/school';
-import CreateSchoolScreen from '../screens/school/createSchool';
+import Dashboard from '../screens/dashboard';
+// import CreateSchoolScreen from '../screens/dashboard/createSchool';
 
 // Create a wrapper component for each screen to add the header with menu button
 const ScreenWrapper = ({ children, title, headerStyle }: { children: React.ReactNode; title?: string, headerStyle?: any }) => {
@@ -66,9 +66,9 @@ const HomeScreenWrapper = () => (
   </ScreenWrapper>
 );
 
-const SchoolScreenWrapper = () => (
+const DashboardScreenWrapper = () => (
   <ScreenWrapper>
-    <SchoolStackScreens />
+    <DashboardStackScreens />
   </ScreenWrapper>
 );
 
@@ -84,19 +84,19 @@ const ProfileScreenWrapper = () => (
   </ScreenWrapper>
 );
 
-const SchoolStack = createStackNavigator();
-const SchoolStackScreens = () => {
+const DashboardStack = createStackNavigator();
+const DashboardStackScreens = () => {
   return (
-    <SchoolStack.Navigator screenOptions={{ headerShown: false }} initialRouteName={routenames.School}>
-      <SchoolStack.Screen name={routenames.School} component={SchoolScreen} />
-      <SchoolStack.Screen name={routenames.CreateSchool} component={CreateSchoolScreen} />
-    </SchoolStack.Navigator>
+    <DashboardStack.Navigator screenOptions={{ headerShown: false }} initialRouteName={routenames.Dashboard}>
+      <DashboardStack.Screen name={routenames.Dashboard} component={Dashboard} />
+      {/* <SchoolStack.Screen name={routenames.CreateSchool} component={CreateSchoolScreen} /> */}
+    </DashboardStack.Navigator>
   );
 };
 
 type BottomTabParamList = {
   Home: undefined;
-  School: undefined;
+  Dashboard: undefined;
   Notifications: undefined;
   Search: undefined;
   Profile: undefined;
@@ -116,10 +116,10 @@ const defaultTabBarStyle = {
 } as const;
 
 const focusedTabStyle = {
-  borderWidth: 1, 
+  borderWidth: 1,
   borderColor: colors.white, 
-  borderRadius: 50, 
-  backgroundColor: colors.white
+  backgroundColor: colors.white,
+  borderRadius: 5,
 } as const;
 
 const BottomTabs = () => {
@@ -153,16 +153,16 @@ const BottomTabs = () => {
         })}
       />
       <Tab.Screen 
-        name="School" 
-        component={SchoolScreenWrapper} 
+        name="Dashboard" 
+        component={DashboardScreenWrapper} 
         options={({ navigation, route }) => ({
           tabBarIcon: ({ focused }) => (
             <Icon 
-              type="material-icon" 
-              name="school" 
+              type="material-community" 
+              name="view-dashboard" 
               color={focused ? colors.blue : colors.white} 
               style={focused ? focusedTabStyle : {}}
-              size={30}
+              size={25}
             />
           ),
           tabBarItemStyle: {},

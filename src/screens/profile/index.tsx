@@ -12,6 +12,7 @@ import { resetAuth } from "../../store/slices/authSlice";
 import styles from "./styles";
 import { Icon } from "@rneui/themed";
 import colors from "../../utils/colors";
+import fonts from "../../utils/fonts";
 import moment from "moment";
 
 const ProfileScreen = () => {
@@ -33,7 +34,7 @@ const ProfileScreen = () => {
           </View>
 
           <View style={styles.userMeta}>
-            <Text style={{ color: colors.blue, fontSize: 25, }}>{user?.firstName} {user?.lastName}</Text>
+            <Text style={{ color: colors.blue, fontSize: 25, fontFamily: fonts.medium }}>{user?.firstName} {user?.lastName}</Text>
             <View style={styles.metaDetail}>
               <Icon 
                 name="email"
@@ -41,7 +42,7 @@ const ProfileScreen = () => {
                 size={15}
                 color={colors.gray}
               />
-              <Text style={{color: colors.gray, marginLeft: 5}}>{user?.email}</Text>
+              <Text style={styles.metaDetailText}>{user?.email}</Text>
             </View>
             <View style={styles.metaDetail}>
               <Icon 
@@ -50,7 +51,7 @@ const ProfileScreen = () => {
                 size={15}
                 color={colors.gray}
               />
-              <Text style={{color: colors.gray, marginLeft: 5}}>{user?.phone}</Text>
+              <Text style={styles.metaDetailText}>{user?.phone}</Text>
             </View>
             <View style={styles.metaDetail}>
               <Icon 
@@ -59,7 +60,7 @@ const ProfileScreen = () => {
                 size={15}
                 color={colors.gray}
               />
-              <Text style={{color: colors.gray, textTransform: 'capitalize', marginLeft: 5}}>{user?.role}</Text>
+              <Text style={[ styles.metaDetailText, { textTransform: 'capitalize' } ]}>{user?.role}</Text>
             </View>
           </View>
         </View>
@@ -162,8 +163,8 @@ const ProfileScreen = () => {
         </TouchableOpacity>
       
         <View style={styles.footer}>
-          <Text>&copy;{moment().format('MMMM Do, YYYY')}</Text>
-          <Text>All rights reserved</Text>
+          <Text style={styles.sectionText}>&copy;{moment().format('MMMM Do, YYYY')}</Text>
+          <Text style={styles.sectionText}>All rights reserved</Text>
         </View>
       </View>
 

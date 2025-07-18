@@ -1,5 +1,6 @@
 import { StyleSheet, Dimensions } from "react-native";
 import colors from "../../utils/colors";
+import fonts from "../../utils/fonts";
 
 const styles = StyleSheet.create({
   container: {
@@ -55,6 +56,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: Dimensions.get('screen').width * 0.40,
   },
+  metaDetailText: {
+    color: colors.gray, 
+    marginLeft: 5,
+    fontFamily: fonts.normal,
+  },
   section: {
     width: Dimensions.get('screen').width * 0.7,
     height: Dimensions.get('screen').height * 0.04,
@@ -68,6 +74,7 @@ const styles = StyleSheet.create({
   },
      sectionText: {
      color: colors.black,
+     fontFamily: fonts.normal,
    },
    sectionsContainer: {
      marginTop: Dimensions.get('screen').height * 0.15,
