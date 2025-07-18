@@ -13,7 +13,7 @@ import LeApi from '../../store/api/leApi';
 const HomeScreen = () => {
   const navigation = useNavigation<NavigationProp<any>>();
   const user = useSelector((state: any) => state?.auth?.user);
-  const { data: schoolData } = LeApi.useGetSchoolsQuery<any>(`${user.schoolId}`,{});
+  const { data: schoolData } = LeApi.useGetSchoolsQuery<any>(`${user?.schoolId}`,{});
   const { data: sessionData, error: sessionError } = LeApi.useGetSessionsQuery<any>(`${user.schoolId}`, {});
   const activeTerm = sessionData?.[0]?.termsId?.filter((term: any) => term.status === 'active')[0];
 

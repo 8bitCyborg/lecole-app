@@ -64,20 +64,25 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: colors.blue,
     flexDirection: 'row',
-    // backgroundColor: colors.white,
-    // shadowColor: colors.black,
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 5,
-    // },
-    // shadowOpacity: 0.3,
-    // shadowRadius: 8,
-    // elevation: 8,
-    // borderRadius: 20,
+    marginTop: 5,
   },
-  sectionText: {
-    color: colors.black,
-  }
+     sectionText: {
+     color: colors.black,
+   },
+   sectionsContainer: {
+     marginTop: Dimensions.get('screen').height * 0.15,
+     display: 'flex',
+     flexDirection: 'column',
+     alignSelf: 'center',
+     width: Dimensions.get('screen').width,
+   },
+   footer: {
+     marginTop: 30,
+     width: Dimensions.get('screen').width * 0.7,
+     alignSelf: 'center', 
+     alignItems: 'flex-end', 
+     flexDirection: 'column'
+   }
 });
 
 export default styles;

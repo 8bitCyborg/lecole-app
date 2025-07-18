@@ -33,7 +33,7 @@ const ProfileScreen = () => {
           </View>
 
           <View style={styles.userMeta}>
-            <Text style={{ color: colors.blue, fontSize: 25, }}>{user.firstName} {user.lastName}</Text>
+            <Text style={{ color: colors.blue, fontSize: 25, }}>{user?.firstName} {user?.lastName}</Text>
             <View style={styles.metaDetail}>
               <Icon 
                 name="email"
@@ -41,7 +41,7 @@ const ProfileScreen = () => {
                 size={15}
                 color={colors.gray}
               />
-              <Text style={{color: colors.gray, marginLeft: 5}}>{user.email}</Text>
+              <Text style={{color: colors.gray, marginLeft: 5}}>{user?.email}</Text>
             </View>
             <View style={styles.metaDetail}>
               <Icon 
@@ -50,7 +50,7 @@ const ProfileScreen = () => {
                 size={15}
                 color={colors.gray}
               />
-              <Text style={{color: colors.gray, marginLeft: 5}}>{user.phone}</Text>
+              <Text style={{color: colors.gray, marginLeft: 5}}>{user?.phone}</Text>
             </View>
             <View style={styles.metaDetail}>
               <Icon 
@@ -59,23 +59,21 @@ const ProfileScreen = () => {
                 size={15}
                 color={colors.gray}
               />
-              <Text style={{color: colors.gray, textTransform: 'capitalize', marginLeft: 5}}>{user.role}</Text>
+              <Text style={{color: colors.gray, textTransform: 'capitalize', marginLeft: 5}}>{user?.role}</Text>
             </View>
           </View>
         </View>
       </View>
 
-      <View style={{
-        position: 'absolute', 
-        top: Dimensions.get('screen').height * 0.35, 
-        display: 'flex',
-        flexDirection: 'column',
-        alignSelf: 'center',
-      }}>
+      <View style={styles.sectionsContainer}>
         {/* <TouchableOpacity style={styles.section}>
           <Text>Biometrics</Text>
         </TouchableOpacity> */}
-        <TouchableOpacity style={styles.section}>
+        <TouchableOpacity 
+          style={styles.section}
+          activeOpacity={0.7}
+          onPress={() => console.log('About Us pressed')}
+        >
           <Text style={styles.sectionText}>About Us</Text>
           <Icon
             name="arrow-right"
@@ -84,7 +82,11 @@ const ProfileScreen = () => {
             color={colors.blue}
           />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.section}>
+        <TouchableOpacity 
+          style={styles.section}
+          activeOpacity={0.7}
+          onPress={() => console.log('Privacy Policy pressed')}
+        >
           <Text style={styles.sectionText}>Privacy Policy</Text>
           <Icon
             name="arrow-right"
@@ -93,7 +95,11 @@ const ProfileScreen = () => {
             color={colors.blue}
           />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.section}>
+        <TouchableOpacity 
+          style={styles.section}
+          activeOpacity={0.7}
+          onPress={() => console.log('Terms pressed')}
+        >
           <Text style={styles.sectionText}>Terms and Conditions</Text>
           <Icon
             name="arrow-right"
@@ -102,7 +108,11 @@ const ProfileScreen = () => {
             color={colors.blue}
           />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.section}>
+        <TouchableOpacity 
+          style={styles.section}
+          activeOpacity={0.7}
+          onPress={() => console.log('FAQ pressed')}
+        >
           <Text style={styles.sectionText}>Frequently Asked Questions</Text>
           <Icon
             name="arrow-right"
@@ -111,7 +121,11 @@ const ProfileScreen = () => {
             color={colors.blue}
           />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.section}>
+        <TouchableOpacity 
+          style={styles.section}
+          activeOpacity={0.7}
+          onPress={() => console.log('Help pressed')}
+        >
           <Text style={styles.sectionText}>Help and Support</Text>
           <Icon
             name="arrow-right"
@@ -120,7 +134,11 @@ const ProfileScreen = () => {
             color={colors.blue}
           />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.section}>
+        <TouchableOpacity 
+          style={styles.section}
+          activeOpacity={0.7}
+          onPress={() => console.log('Reset Password pressed')}
+        >
           <Text style={styles.sectionText}>Reset Password</Text>
           <Icon
             name="arrow-right"
@@ -129,7 +147,11 @@ const ProfileScreen = () => {
             color={colors.blue}
           />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.section}>
+        <TouchableOpacity 
+          style={styles.section}
+          activeOpacity={0.7}
+          onPress={() => dispatch(resetAuth())}
+        >
           <Text style={styles.sectionText}>Logout</Text>
           <Icon
             name="arrow-right"
@@ -139,15 +161,12 @@ const ProfileScreen = () => {
           />
         </TouchableOpacity>
       
-      
-        <View style={{marginTop: 70, alignItems:'flex-end', flexDirection: 'column'}}>
+        <View style={styles.footer}>
           <Text>&copy;{moment().format('MMMM Do, YYYY')}</Text>
           <Text>All rights reserved</Text>
         </View>
       </View>
 
-      
-      
     </ScrollView>
   );
 };
