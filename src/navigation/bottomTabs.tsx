@@ -9,57 +9,11 @@ import colors from '../utils/colors';
 import Icon from '@rneui/themed/dist/Icon';
 import routenames from './routenames';
 import DrawerContent from './drawer';
-import { ScreenWrapper } from './drawer';
 
 import HomeScreen from '../screens/home';
 import ProfileScreen from '../screens/profile';
 import NotificationsScreen from '../screens/notifications';
 import Dashboard from '../screens/dashboard';
-import ClassRoom from '../screens/class';
-
-const withScreenWrapper = (Component: React.ComponentType<any>, wrapperProps = {}) => {
-  return (props: any) => (
-    <ScreenWrapper {...wrapperProps}>
-      <Component {...props} />
-    </ScreenWrapper>
-  );
-};
-
-
-// Wrapped screen components
-const HomeScreenWrapper = () => (
-  <ScreenWrapper>
-    <HomeScreen />
-  </ScreenWrapper>
-);
-
-const DashboardScreenWrapper = () => (
-  <ScreenWrapper>
-    <DashboardStackScreens />
-  </ScreenWrapper>
-);
-
-const NotificationsScreenWrapper = () => (
-  <ScreenWrapper>
-    <NotificationsScreen />
-  </ScreenWrapper>
-);
-
-const ProfileScreenWrapper = () => (
-  <ScreenWrapper headerStyle={{ backgroundColor: colors.blue }}>
-    <ProfileScreen />
-  </ScreenWrapper>
-);
-
-const DashboardStack = createStackNavigator();
-const DashboardStackScreens = () => {
-  return (
-    <DashboardStack.Navigator screenOptions={{ headerShown: false }} initialRouteName={routenames.Dashboard}>
-      <DashboardStack.Screen name={routenames.Dashboard} component={Dashboard} />
-      <DashboardStack.Screen name={routenames.ClassRoom} component={ClassRoom} />
-    </DashboardStack.Navigator>
-  );
-};
 
 type BottomTabParamList = {
   Home: undefined;
@@ -102,7 +56,7 @@ const BottomTabs = () => {
     >
       <Tab.Screen 
         name="Home" 
-        component={HomeScreenWrapper} 
+        component={HomeScreen} 
         options={({ navigation, route }) => ({
           tabBarIcon: ({ focused }) => (
             <Icon 
@@ -121,7 +75,7 @@ const BottomTabs = () => {
       />
       <Tab.Screen 
         name="Dashboard" 
-        component={DashboardScreenWrapper} 
+        component={Dashboard} 
         options={({ navigation, route }) => ({
           tabBarIcon: ({ focused }) => (
             <Icon 
@@ -140,7 +94,7 @@ const BottomTabs = () => {
       />
       <Tab.Screen 
         name="Notifications" 
-        component={NotificationsScreenWrapper} 
+        component={NotificationsScreen} 
         options={({ navigation, route }) => ({
           tabBarIcon: ({ focused }) => (
             <Icon 
@@ -159,7 +113,7 @@ const BottomTabs = () => {
       />
       <Tab.Screen 
         name="Profile" 
-        component={ProfileScreenWrapper} 
+        component={ProfileScreen} 
         options={({ navigation, route }) => ({
           tabBarIcon: ({ focused }) => (
             <Icon 
