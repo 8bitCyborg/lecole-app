@@ -17,6 +17,7 @@ import routenames from './routenames';
 
 const DrawerContent = ({ navigation, closeDrawer }: { navigation: any; closeDrawer: () => void }) => {
   const user = useSelector((state: any) => state?.auth?.user);
+  const isAdmin = user.role == 'superadmin';
   const dispatch = useDispatch();
 
   return (
@@ -95,55 +96,58 @@ const DrawerContent = ({ navigation, closeDrawer }: { navigation: any; closeDraw
           <Icon name="person" type="material-icon" size={24} color={colors.white} />
           <Text style={{ color: colors.white, fontSize: 16, marginLeft: 15 }}>Assessments</Text>
         </TouchableOpacity>
-        <TouchableOpacity 
-          style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 15 }}
-          onPress={() => {
-            // Navigate to Staff screen
-            closeDrawer();
-          }}
-        >
-          <Icon name="people" type="material-icon" size={24} color={colors.white} />
-          <Text style={{ color: colors.white, fontSize: 16, marginLeft: 15 }}>Staff</Text>
-        </TouchableOpacity>
-        <TouchableOpacity 
-          style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 15 }}
-          onPress={() => {
-            // Navigate to Finances screen
-            closeDrawer();
-          }}
-        >
-          <Icon name="money-bill-wave" type="font-awesome-5" size={24} color={colors.white} />
-          <Text style={{ color: colors.white, fontSize: 16, marginLeft: 15 }}>Finances</Text>
-        </TouchableOpacity>
 
-        <TouchableOpacity 
-          style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 15 }}
-          onPress={() => {
-            // Navigate to Events screen
-            closeDrawer();
-          }}
-        >
-          <Icon name="event" type="material-icon" size={24} color={colors.white} />
-          <Text style={{ color: colors.white, fontSize: 16, marginLeft: 15 }}>Events</Text>
-        </TouchableOpacity>
+        {isAdmin &&
+          <>
+            <TouchableOpacity 
+              style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 15 }}
+              onPress={() => {
+                // Navigate to Staff screen
+                closeDrawer();
+              }}
+            >
+              <Icon name="people" type="material-icon" size={24} color={colors.white} />
+              <Text style={{ color: colors.white, fontSize: 16, marginLeft: 15 }}>Staff</Text>
+            </TouchableOpacity>
+            <TouchableOpacity 
+              style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 15 }}
+              onPress={() => {
+                // Navigate to Finances screen
+                closeDrawer();
+              }}
+            >
+              <Icon name="money-bill-wave" type="font-awesome-5" size={24} color={colors.white} />
+              <Text style={{ color: colors.white, fontSize: 16, marginLeft: 15 }}>Finances</Text>
+            </TouchableOpacity>
 
-        <TouchableOpacity 
-          style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 15 }}
-          onPress={() => {
-            // Navigate to Archives screen
-            closeDrawer();
-          }}
-        >
-          <Icon name="archive" type="entypo" size={24} color={colors.white} />
-          <Text style={{ color: colors.white, fontSize: 16, marginLeft: 15 }}>Archives</Text>
-        </TouchableOpacity>
+            <TouchableOpacity 
+              style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 15 }}
+              onPress={() => {
+                // Navigate to Events screen
+                closeDrawer();
+              }}
+            >
+              <Icon name="event" type="material-icon" size={24} color={colors.white} />
+              <Text style={{ color: colors.white, fontSize: 16, marginLeft: 15 }}>Events</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity 
+              style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 15 }}
+              onPress={() => {
+                // Navigate to Archives screen
+                closeDrawer();
+              }}
+            >
+              <Icon name="archive" type="entypo" size={24} color={colors.white} />
+              <Text style={{ color: colors.white, fontSize: 16, marginLeft: 15 }}>Archives</Text>
+            </TouchableOpacity>
+          </>
+        }
       </View>
-
+      
       <View style={{ width: '100%', height: 1, backgroundColor: colors.white, marginVertical: 20,}}></View>
 
-      {/* Settings Section */}
       <View style={{ paddingHorizontal: 20, position: 'absolute', bottom: -90 }}>
-
         <TouchableOpacity 
           style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 15 }}
           onPress={() => {
